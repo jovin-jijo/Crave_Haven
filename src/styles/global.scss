@@ -1,0 +1,769 @@
+@use "./variables" as *;
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: $cream;
+    color: $charcoal;
+    font-family: "Roboto Mono", monospace;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+main {
+    overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+p {
+    overflow-wrap: break-word;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    padding: clamp(18px, 2.5vw, 24px) clamp(18px, 3vw, 32px);
+
+    color: $cream;
+}
+
+.nav {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.brand {
+    min-width: 0;
+
+    font-family: "Lora", serif;
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.nav-links {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: clamp(14px, 2.5vw, 30px);
+}
+
+.nav-links a {
+    font-size: clamp(9px, 1vw, 12px);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.65;
+}
+
+/* =========================================================
+   SHARED CONTAINER
+   ========================================================= */
+
+.home-container {
+    width: min(
+        1200px,
+        calc(100% - clamp(32px, 6vw, 64px))
+    );
+
+    margin: 0 auto;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: clamp(16px, 3vw, 30px);
+    margin-bottom: clamp(18px, 2.5vw, 24px);
+
+    min-width: 0;
+}
+
+.section-heading > div {
+    min-width: 0;
+}
+
+.section-heading h2 {
+    margin: 4px 0 0;
+
+    font-family: "Lora", serif;
+    font-weight: 500;
+    line-height: 1.08;
+
+    font-size: clamp(30px, 3.5vw, 42px);
+}
+
+.section-eyebrow {
+    display: block;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: clamp(9px, 0.8vw, 10px);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.section-link {
+    flex-shrink: 0;
+
+    font-family: "Roboto Mono", monospace;
+    font-size: clamp(10px, 0.9vw, 11px);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 3px;
+
+    transition: opacity 0.2s ease;
+}
+
+.section-link:hover {
+    opacity: 0.6;
+}
+
+/* =========================================================
+   HERO / FEATURED
+   ========================================================= */
+
+.featured-home {
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+
+    padding:
+        clamp(54px, 6vw, 70px)
+        0
+        clamp(20px, 3vw, 30px);
+
+    background-image:
+        linear-gradient(
+            to bottom,
+            rgba(61, 57, 51, 0.48) 0%,
+            rgba(61, 57, 51, 0.34) 45%,
+            rgba(61, 57, 51, 0.58) 100%
+        ),
+        url("/images/hero/nature.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: $cream;
+}
+
+/* =========================================================
+   FEATURED STORIES
+   ========================================================= */
+
+.featured-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(0, 0.775fr)
+        minmax(0, 0.775fr);
+
+    gap: clamp(14px, 2vw, 20px);
+
+    padding: clamp(10px, 1.5vw, 16px);
+
+    background: rgba(244, 237, 224, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: clamp(15px, 2vw, 20px);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.featured-story {
+    min-width: 0;
+}
+
+.featured-story a {
+    display: block;
+    height: 100%;
+}
+
+.featured-image {
+    position: relative;
+    overflow: hidden;
+
+    aspect-ratio: 4 / 3;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(244, 237, 224, 0.3),
+            rgba(139, 84, 56, 0.35)
+        );
+
+    border-radius: clamp(8px, 1vw, 11px);
+}
+
+.featured-story-main .featured-image {
+    aspect-ratio: 16 / 10;
+}
+
+.featured-image img {
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+.featured-story:hover .featured-image img {
+    transform: scale(1.025);
+}
+
+.featured-story-content {
+    padding: clamp(11px, 1.5vw, 14px) 2px 2px;
+}
+
+.story-type {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+
+    opacity: 0.72;
+}
+
+.featured-story-content h2 {
+    margin: 0 0 7px;
+
+    font-family: "Lora", serif;
+    font-size: clamp(20px, 2vw, 22px);
+    font-weight: 600;
+    line-height: 1.18;
+}
+
+.featured-story-main .featured-story-content h2 {
+    font-size: clamp(27px, 3vw, 40px);
+}
+
+.featured-story-content p {
+    max-width: 600px;
+
+    margin: 0 0 8px;
+
+    font-size: clamp(11px, 1vw, 12px);
+    line-height: 1.55;
+
+    opacity: 0.85;
+}
+
+.featured-story-content time {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    opacity: 0.65;
+}
+
+/* =========================================================
+   RECIPE SECTIONS
+   ========================================================= */
+
+.recipe-section {
+    padding: clamp(48px, 5vw, 62px) 0;
+    background: $cream;
+}
+
+.recipe-section-alt {
+    background: $oat;
+}
+
+.recipe-home-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 240px), 1fr)
+    );
+
+    gap:
+        clamp(22px, 2.5vw, 30px)
+        clamp(14px, 1.7vw, 20px);
+}
+
+.recipe-card {
+    min-width: 0;
+}
+
+.recipe-card > a {
+    display: block;
+}
+
+.recipe-image {
+    position: relative;
+    overflow: hidden;
+
+    aspect-ratio: 4 / 3;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 84, 56, 0.15),
+            rgba(137, 145, 123, 0.2)
+        );
+
+    border-radius: 8px;
+}
+
+.recipe-image img {
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+.recipe-card:hover .recipe-image img {
+    transform: scale(1.035);
+}
+
+.recipe-card-content {
+    padding-top: 11px;
+}
+
+.card-category {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: $cinnamon;
+
+    font-size: clamp(9px, 0.8vw, 10px);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.recipe-card h3 {
+    margin: 0;
+
+    font-family: "Lora", serif;
+    font-size: clamp(16px, 1.5vw, 19px);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.recipe-card p {
+    margin: 7px 0 0;
+
+    font-size: clamp(10px, 0.9vw, 12px);
+    line-height: 1.55;
+
+    opacity: 0.72;
+}
+
+/* =========================================================
+   JOURNAL
+   ========================================================= */
+
+.journal-section {
+    padding: clamp(50px, 5vw, 66px) 0;
+    background: $cream;
+}
+
+.journal-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 320px), 1fr)
+    );
+
+    gap: clamp(22px, 2.5vw, 28px);
+}
+
+.blog-card {
+    min-width: 0;
+}
+
+.blog-image {
+    position: relative;
+    overflow: hidden;
+
+    aspect-ratio: 4 / 3;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 84, 56, 0.15),
+            rgba(137, 145, 123, 0.2)
+        );
+
+    border-radius: 8px;
+}
+
+.blog-image img {
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.035);
+}
+
+.blog-card-content {
+    padding-top: 13px;
+}
+
+.blog-card-content time {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    opacity: 0.58;
+}
+
+.blog-card h3 {
+    margin: 5px 0 7px;
+
+    font-family: "Lora", serif;
+    font-size: clamp(20px, 1.8vw, 22px);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.blog-card p {
+    margin: 0;
+
+    font-size: clamp(10px, 0.9vw, 12px);
+    line-height: 1.55;
+
+    opacity: 0.72;
+}
+
+.read-more {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+
+    border-bottom: 1px solid currentColor;
+}
+
+/* =========================================================
+   CLOSING
+   ========================================================= */
+
+.closing-section {
+    padding: clamp(68px, 8vw, 88px) clamp(20px, 4vw, 24px);
+
+    background: $charcoal;
+    color: $cream;
+}
+
+.closing-inner {
+    width: min(760px, 100%);
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.closing-inner .section-eyebrow {
+    opacity: 0.65;
+}
+
+.closing-inner h2 {
+    margin: 14px 0;
+
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1.05;
+}
+
+.closing-inner p {
+    margin: 0;
+
+    font-size: clamp(11px, 1vw, 12px);
+    opacity: 0.68;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    padding: 26px 24px;
+
+    background: $charcoal;
+    color: $cream;
+
+    border-top: 1px solid rgba(244, 237, 224, 0.12);
+
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .featured-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .featured-story-main {
+        grid-column: 1 / -1;
+    }
+
+    .recipe-home-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+    .site-header {
+        padding: 12px 16px;
+    }
+
+    .nav {
+        gap: 12px;
+    }
+
+    .nav-links {
+        gap: clamp(10px, 4vw, 16px);
+    }
+
+    .brand {
+        font-size: 15px;
+    }
+
+    .nav-links a {
+        font-size: 9px;
+    }
+
+    .home-container {
+        width: calc(100% - 32px);
+    }
+
+    .featured-home {
+        min-height: auto;
+        padding: 60px 0 30px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 9px;
+        margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+        font-size: clamp(29px, 8vw, 32px);
+    }
+
+    .section-link {
+        font-size: 10px;
+    }
+
+    .featured-grid {
+        grid-template-columns: 1fr;
+
+        padding: 11px;
+        gap: 22px;
+
+        border-radius: 16px;
+    }
+
+    .featured-story-main {
+        grid-column: auto;
+    }
+
+    .featured-story-main .featured-image,
+    .featured-image {
+        aspect-ratio: 4 / 3;
+    }
+
+    .featured-story-content {
+        padding-top: 12px;
+    }
+
+    .featured-story-main .featured-story-content h2 {
+        font-size: clamp(27px, 7.5vw, 30px);
+    }
+
+    .featured-story-content h2 {
+        font-size: 21px;
+    }
+
+    .featured-story-content p {
+        font-size: 11px;
+    }
+
+    .recipe-section,
+    .journal-section {
+        padding: 50px 0;
+    }
+
+    .recipe-home-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 26px 14px;
+    }
+
+    .recipe-card h3 {
+        font-size: clamp(16px, 4.5vw, 18px);
+    }
+
+    .recipe-card p {
+        font-size: 10px;
+        line-height: 1.5;
+    }
+
+    .card-category {
+        font-size: 9px;
+    }
+
+    .journal-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .blog-card h3 {
+        font-size: 21px;
+    }
+
+    .blog-card p {
+        font-size: 11px;
+    }
+
+    .closing-section {
+        padding: 68px 20px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+    .site-header {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .nav {
+        gap: 8px;
+    }
+
+    .brand {
+        font-size: 14px;
+    }
+
+    .nav-links {
+        gap: 9px;
+    }
+
+    .nav-links a {
+        font-size: 8px;
+        letter-spacing: 0.06em;
+    }
+
+    .home-container {
+        width: calc(100% - 28px);
+    }
+
+    .featured-home {
+        padding-top: 54px;
+    }
+
+    .featured-grid {
+        padding: 9px;
+        gap: 19px;
+    }
+
+    .recipe-home-grid {
+        gap: 23px 11px;
+    }
+
+    .recipe-card h3 {
+        font-size: 15.5px;
+    }
+
+    .recipe-card p {
+        font-size: 9.5px;
+    }
+}
+
+@media (max-width: 760px) {
+    .site-header {
+        padding: 22px 20px;
+    }
+
+    .nav {
+        align-items: flex-start;
+    }
+
+    .brand {
+        font-size: 0.82rem;
+    }
+
+    .nav-links {
+        gap: 15px;
+        font-size: 0.7rem;
+    }
+}

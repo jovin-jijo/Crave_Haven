@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RecipeCard from "../components/RecipeCard.astro";
+import BlogCard from "../components/BlogCard.astro";
+import { recipes } from "../data/recipes";
+import { posts } from "../data/posts";
+
+const featuredRecipes = recipes.slice(0, 3);
+const latestRecipes = recipes;
+const featuredPosts = posts.slice(0, 3);
+
+---
+
+<BaseLayout
+    title="Crave Haven"
+    description="Recipes, stories, and inspiration from Crave Haven."
+>
+    <!-- FEATURED -->
+    <section class="featured-home">
+        <div class="home-container">
+
+            <div class="featured-grid">
+                {
+                    featuredPosts.map((post, index) => (
+                        <article
+                            class:list={[
+                                "featured-story",
+                                index === 0 && "featured-story-main"
+                            ]}
+                        >
+                            <a href={`/blog/${post.slug}/`}>
+                                <div class="featured-image">
+                                    <img
+                                        src={post.image}
+                                        alt={post.title}
+                                        loading={index === 0 ? "eager" : "lazy"}
+                                        onerror="this.style.display='none'"
+                                    />
+                                </div>
+
+                                <div class="featured-story-content">
+                                    <span class="story-type">
+                                        {index === 0 ? "FEATURED STORY" : "FROM THE JOURNAL"}
+                                    </span>
+
+                                    <h2>{post.title}</h2>
+
+                                    <p>{post.excerpt}</p>
+
+                                    <time>{post.date}</time>
+                                </div>
+                            </a>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- LATEST RECIPES -->
+    <section class="recipe-section">
+        <div class="home-container">
+            <div class="section-heading">
+                <div>
+                    <span class="section-eyebrow">FROM THE KITCHEN</span>
+                    <h2>Latest Recipes</h2>
+                </div>
+
+                <a href="/recipes/" class="section-link">
+                    View all recipes →
+                </a>
+            </div>
+
+            <div class="recipe-home-grid">
+                {
+                    latestRecipes.map((recipe) => (
+                        <RecipeCard recipe={recipe} />
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND STATEMENT -->
+    <section class="closing-section">
+        <div class="closing-inner">
+            <span class="section-eyebrow">CRAVE HAVEN</span>
+
+            <h2>Good food doesn't have to be complicated.</h2>
+
+            <p>
+                Simple ingredients. Thoughtful recipes. Food worth
+                gathering around.
+            </p>
+        </div>
+    </section>
+</BaseLayout>
