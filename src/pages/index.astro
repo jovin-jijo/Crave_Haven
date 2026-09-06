@@ -5,10 +5,9 @@ import BlogCard from "../components/BlogCard.astro";
 import { recipes } from "../data/recipes";
 import { posts } from "../data/posts";
 
-const featuredRecipes = recipes.slice(0, 3);
+const featuredRecipes = recipes.slice(0, 5);
 const latestRecipes = recipes;
-const featuredPosts = posts.slice(0, 3);
-
+const featuredPosts = posts.slice(0, 5);
 ---
 
 <BaseLayout
@@ -18,7 +17,6 @@ const featuredPosts = posts.slice(0, 3);
     <!-- FEATURED -->
     <section class="featured-home">
         <div class="home-container">
-
             <div class="featured-grid">
                 {
                     featuredPosts.map((post, index) => (

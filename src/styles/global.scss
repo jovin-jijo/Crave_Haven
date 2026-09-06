@@ -38,19 +38,18 @@ p {
     overflow-wrap: break-word;
 }
 
+
 /* =========================================================
-   HEADER
+   HEADER & NAVIGATION
    ========================================================= */
 
 .site-header {
     position: absolute;
-    z-index: 20;
+    z-index: 30;
     top: 0;
     left: 0;
-
     width: 100%;
-    padding: clamp(18px, 2.5vw, 24px) clamp(18px, 3vw, 32px);
-
+    padding: 20px 24px;
     color: $cream;
 }
 
@@ -67,12 +66,48 @@ p {
 
 .brand {
     min-width: 0;
+    z-index: 32;
 
     font-family: "Lora", serif;
-    font-size: clamp(15px, 1.5vw, 18px);
+    font-size: clamp(24px, 2.5vw, 28px);
     font-weight: 700;
     letter-spacing: 0.08em;
     white-space: nowrap;
+}
+
+/* Hamburger Toggle Button */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 32;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 .nav-links {
@@ -82,12 +117,12 @@ p {
     align-items: center;
     justify-content: flex-end;
 
-    gap: clamp(14px, 2.5vw, 30px);
+    gap: 24px;
 }
 
 .nav-links a {
-    font-size: clamp(9px, 1vw, 12px);
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400; /* Unbolded nav links */
     letter-spacing: 0.08em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -134,7 +169,7 @@ p {
     font-weight: 500;
     line-height: 1.08;
 
-    font-size: clamp(30px, 3.5vw, 42px);
+    font-size: clamp(28px, 3.5vw, 40px);
 }
 
 .section-eyebrow {
@@ -175,9 +210,9 @@ p {
     align-items: center;
 
     padding:
-        clamp(54px, 6vw, 70px)
+        clamp(100px, 10vw, 130px)
         0
-        clamp(20px, 3vw, 30px);
+        clamp(40px, 5vw, 60px);
 
     background-image:
         linear-gradient(
@@ -196,20 +231,65 @@ p {
 }
 
 /* =========================================================
-   FEATURED STORIES
+   HERO 5-BOX GRID
+   ========================================================= */
+
+.hero-boxes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(12px, 1.8vw, 20px);
+    margin-top: clamp(24px, 3vw, 40px);
+}
+
+.hero-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(16px, 1.8vw, 22px);
+    
+    background: rgba(244, 237, 224, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: clamp(10px, 1.2vw, 14px);
+    
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.hero-box:hover {
+    transform: translateY(-4px);
+    background: rgba(244, 237, 224, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-box h3 {
+    margin: 0 0 6px;
+    font-family: "Lora", serif;
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.hero-box p {
+    margin: 0;
+    font-size: clamp(10px, 0.85vw, 12px);
+    line-height: 1.45;
+    opacity: 0.85;
+}
+
+/* =========================================================
+   FEATURED STORIES (5-BOX COMPACT GRID)
    ========================================================= */
 
 .featured-grid {
     display: grid;
+    /* 1 wide column on the left (1.3fr), 2 equal columns on the right (1fr 1fr) */
+    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-rows: repeat(2, auto);
+    gap: clamp(10px, 1.2vw, 14px);
 
-    grid-template-columns:
-        minmax(0, 1.45fr)
-        minmax(0, 0.775fr)
-        minmax(0, 0.775fr);
-
-    gap: clamp(14px, 2vw, 20px);
-
-    padding: clamp(10px, 1.5vw, 16px);
+    padding: clamp(10px, 1.2vw, 14px);
 
     background: rgba(244, 237, 224, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.32);
@@ -221,37 +301,46 @@ p {
 
 .featured-story {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .featured-story a {
-    display: block;
+    display: flex;
+    flex-direction: column;
     height: 100%;
+}
+
+/* Left main feature spans 2 rows */
+.featured-story-main {
+    grid-column: 1 / 2;
+    grid-row: 1 / span 2;
 }
 
 .featured-image {
     position: relative;
     overflow: hidden;
+    /* Compact 16:9 ratio for small side cards */
+    aspect-ratio: 16 / 9;
 
-    aspect-ratio: 4 / 3;
+    background: linear-gradient(
+        135deg,
+        rgba(244, 237, 224, 0.3),
+        rgba(139, 84, 56, 0.35)
+    );
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(244, 237, 224, 0.3),
-            rgba(139, 84, 56, 0.35)
-        );
-
-    border-radius: clamp(8px, 1vw, 11px);
+    border-radius: clamp(6px, 0.8vw, 9px);
 }
 
+/* Main featured card gets a taller image ratio */
 .featured-story-main .featured-image {
     aspect-ratio: 16 / 10;
 }
 
 .featured-image img {
+    width: 100%;
     height: 100%;
     object-fit: cover;
-
     transition: transform 0.5s ease;
 }
 
@@ -259,49 +348,54 @@ p {
     transform: scale(1.025);
 }
 
+/* Compact padding for the text container */
 .featured-story-content {
-    padding: clamp(11px, 1.5vw, 14px) 2px 2px;
+    padding: 8px 2px 2px;
 }
 
 .story-type {
     display: block;
-
-    margin-bottom: 6px;
-
-    font-size: 9px;
+    margin-bottom: 3px;
+    font-size: 8.5px;
     font-weight: 600;
-    letter-spacing: 0.13em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-
     opacity: 0.72;
 }
 
+/* Smaller titles on the right-side cards */
 .featured-story-content h2 {
-    margin: 0 0 7px;
-
+    margin: 0 0 4px;
     font-family: "Lora", serif;
-    font-size: clamp(20px, 2vw, 22px);
+    font-size: clamp(12px, 1vw, 14px);
     font-weight: 600;
-    line-height: 1.18;
+    line-height: 1.2;
 }
 
 .featured-story-main .featured-story-content h2 {
-    font-size: clamp(27px, 3vw, 40px);
+    font-size: clamp(18px, 2vw, 24px);
 }
 
+/* Hide excerpt on smaller side boxes so all 4 fit cleanly */
 .featured-story-content p {
-    max-width: 600px;
-
-    margin: 0 0 8px;
-
-    font-size: clamp(11px, 1vw, 12px);
-    line-height: 1.55;
-
+    display: none; 
+    margin: 0 0 6px;
+    font-size: clamp(10px, 0.85vw, 11px);
+    line-height: 1.4;
     opacity: 0.85;
 }
 
+/* Only show description text on the main featured card */
+.featured-story-main .featured-story-content p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: clamp(11px, 1vw, 12px);
+}
+
 .featured-story-content time {
-    font-size: 9px;
+    font-size: 8.5px;
     letter-spacing: 0.04em;
     opacity: 0.65;
 }
@@ -555,55 +649,85 @@ p {
 }
 
 /* =========================================================
-   TABLET
+   RESPONSIVE MEDIA QUERIES
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+    .hero-boxes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .featured-grid {
         grid-template-columns: 1fr 1fr;
     }
 
     .featured-story-main {
         grid-column: 1 / -1;
+        grid-row: auto;
     }
+}
 
+@media (max-width: 900px) {
     .recipe-home-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 680px) {
+@media (max-width: 768px) {
     .site-header {
-        padding: 12px 16px;
+        padding: 16px 20px;
     }
 
-    .nav {
-        gap: 12px;
+    .nav-toggle {
+        display: flex;
     }
 
     .nav-links {
-        gap: clamp(10px, 4vw, 16px);
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: $charcoal;
+        color: $cream;
+
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 31;
     }
 
-    .brand {
-        font-size: 15px;
+    .nav-links.is-open {
+        transform: translateX(0);
     }
 
     .nav-links a {
-        font-size: 9px;
+        font-size: 20px;
+        font-weight: 400; /* Unbolded mobile links */
+        letter-spacing: 0.1em;
     }
 
+    .brand {
+        font-size: 22px;
+    }
+
+    .hero-boxes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 680px) {
     .home-container {
         width: calc(100% - 32px);
     }
 
     .featured-home {
         min-height: auto;
-        padding: 60px 0 30px;
+        padding: 80px 0 30px;
     }
 
     .section-heading {
@@ -614,7 +738,7 @@ p {
     }
 
     .section-heading h2 {
-        font-size: clamp(29px, 8vw, 32px);
+        font-size: clamp(26px, 7vw, 30px);
     }
 
     .section-link {
@@ -623,15 +747,14 @@ p {
 
     .featured-grid {
         grid-template-columns: 1fr;
-
         padding: 11px;
         gap: 22px;
-
         border-radius: 16px;
     }
 
     .featured-story-main {
         grid-column: auto;
+        grid-row: auto;
     }
 
     .featured-story-main .featured-image,
@@ -644,11 +767,11 @@ p {
     }
 
     .featured-story-main .featured-story-content h2 {
-        font-size: clamp(27px, 7.5vw, 30px);
+        font-size: clamp(16px, 4.5vw, 19px);
     }
 
     .featured-story-content h2 {
-        font-size: 21px;
+        font-size: 16px;
     }
 
     .featured-story-content p {
@@ -657,7 +780,7 @@ p {
 
     .recipe-section,
     .journal-section {
-        padding: 50px 0;
+        padding: 40px 0;
     }
 
     .recipe-home-grid {
@@ -666,7 +789,7 @@ p {
     }
 
     .recipe-card h3 {
-        font-size: clamp(16px, 4.5vw, 18px);
+        font-size: clamp(15px, 4vw, 17px);
     }
 
     .recipe-card p {
@@ -684,7 +807,7 @@ p {
     }
 
     .blog-card h3 {
-        font-size: 21px;
+        font-size: 20px;
     }
 
     .blog-card p {
@@ -692,13 +815,15 @@ p {
     }
 
     .closing-section {
-        padding: 68px 20px;
+        padding: 56px 20px;
     }
 }
 
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
+@media (max-width: 480px) {
+    .hero-boxes {
+        grid-template-columns: 1fr;
+    }
+}
 
 @media (max-width: 380px) {
     .site-header {
@@ -706,21 +831,12 @@ p {
         padding-right: 14px;
     }
 
-    .nav {
-        gap: 8px;
-    }
-
     .brand {
-        font-size: 14px;
-    }
-
-    .nav-links {
-        gap: 9px;
+        font-size: 20px;
     }
 
     .nav-links a {
-        font-size: 8px;
-        letter-spacing: 0.06em;
+        font-size: 18px;
     }
 
     .home-container {
@@ -728,7 +844,7 @@ p {
     }
 
     .featured-home {
-        padding-top: 54px;
+        padding-top: 70px;
     }
 
     .featured-grid {
@@ -741,29 +857,10 @@ p {
     }
 
     .recipe-card h3 {
-        font-size: 15.5px;
+        font-size: 15px;
     }
 
     .recipe-card p {
         font-size: 9.5px;
-    }
-}
-
-@media (max-width: 760px) {
-    .site-header {
-        padding: 22px 20px;
-    }
-
-    .nav {
-        align-items: flex-start;
-    }
-
-    .brand {
-        font-size: 0.82rem;
-    }
-
-    .nav-links {
-        gap: 15px;
-        font-size: 0.7rem;
     }
 }
