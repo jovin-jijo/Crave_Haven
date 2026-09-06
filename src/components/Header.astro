@@ -2,10 +2,55 @@
     <nav class="nav">
         <a class="brand" href="/">CRAVE HAVEN</a>
 
+        <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/recipes/">Recipes</a>
             <a href="/blog/">Blog</a>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/">Home</a>
+        <a href="/recipes/">Recipes</a>
+        <a href="/blog/">Blog</a>
+    </div>
 </header>
+
+<script>
+    const toggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".mobile-menu");
+
+    toggle?.addEventListener("click", () => {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+        toggle.setAttribute("aria-expanded", String(!isOpen));
+        toggle.setAttribute(
+            "aria-label",
+            isOpen ? "Open navigation menu" : "Close navigation menu"
+        );
+
+        menu?.classList.toggle("open", !isOpen);
+        toggle.classList.toggle("open", !isOpen);
+    });
+
+    document.querySelectorAll(".mobile-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+            toggle?.setAttribute("aria-expanded", "false");
+            toggle?.setAttribute("aria-label", "Open navigation menu");
+            menu?.classList.remove("open");
+            toggle?.classList.remove("open");
+        });
+    });
+</script>

@@ -1,11 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import RecipeCard from "../components/RecipeCard.astro";
-import BlogCard from "../components/BlogCard.astro";
 import { recipes } from "../data/recipes";
 import { posts } from "../data/posts";
 
-const featuredRecipes = recipes.slice(0, 5);
 const latestRecipes = recipes;
 const featuredPosts = posts.slice(0, 5);
 ---
@@ -38,7 +36,9 @@ const featuredPosts = posts.slice(0, 5);
 
                                 <div class="featured-story-content">
                                     <span class="story-type">
-                                        {index === 0 ? "FEATURED STORY" : "FROM THE JOURNAL"}
+                                        {index === 0
+                                            ? "FEATURED STORY"
+                                            : "FROM THE JOURNAL"}
                                     </span>
 
                                     <h2>{post.title}</h2>
